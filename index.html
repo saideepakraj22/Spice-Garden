@@ -1,593 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spice Garden - Premium Indian Dining Experience</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-gold: #D4AF37;
-            --dark-bg: #1a1a1a;
-            --dark-secondary: #2d2d2d;
-            --text-light: #f8f8f8;
-            --text-muted: #b0b0b0;
-            --accent-warm: #ff6b35;
-            --white: #ffffff;
-            --shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: var(--text-light);
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: var(--dark-bg);
-            padding: 0.5rem 0;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-gold);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background: var(--primary-gold);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-gold);
-        }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 4px;
-        }
-
-        .hamburger span {
-            width: 25px;
-            height: 3px;
-            background: var(--primary-gold);
-            transition: 0.3s;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%231a1a1a" width="1200" height="800"/><circle fill="%23D4AF37" opacity="0.1" cx="200" cy="200" r="150"/><circle fill="%23ff6b35" opacity="0.1" cx="1000" cy="300" r="120"/><rect fill="%23b0b0b0" opacity="0.05" x="800" y="500" width="300" height="200"/></svg>');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            margin-bottom: 1rem;
-            color: var(--white);
-            text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-        }
-
-        .hero-content .tagline {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            margin-bottom: 2rem;
-            color: var(--text-light);
-            opacity: 0.9;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            font-size: 1.1rem;
-            box-shadow: var(--shadow);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.4);
-        }
-
-        /* Sections */
-        section {
-            padding: 100px 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* About Section */
-        .about {
-            background: var(--dark-secondary);
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 3rem;
-            color: var(--primary-gold);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
-        }
-
-        .about-image {
-            position: relative;
-        }
-
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: -20px;
-            bottom: -20px;
-            background: linear-gradient(45deg, var(--primary-gold), var(--accent-warm));
-            z-index: -1;
-            border-radius: 20px;
-        }
-
-        .about-image img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 20px;
-        }
-
-        /* Menu Section */
-        .menu {
-            background: var(--dark-bg);
-        }
-
-        .menu h2 {
-            text-align: center;
-            font-size: 3.5rem;
-            color: var(--primary-gold);
-            margin-bottom: 3rem;
-        }
-
-        .menu-filters {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 0.8rem 2rem;
-            border: 2px solid var(--primary-gold);
-            background: transparent;
-            color: var(--text-light);
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-            transform: translateY(-2px);
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .menu-item {
-            background: var(--dark-secondary);
-            padding: 2rem;
-            border-radius: 20px;
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .menu-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .menu-item:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow);
-        }
-
-        .menu-item h3 {
-            color: var(--primary-gold);
-            margin-bottom: 0.5rem;
-        }
-
-        .menu-price {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--accent-warm);
-            margin: 1rem 0;
-        }
-
-        /* Gallery */
-        .gallery {
-            background: var(--dark-secondary);
-        }
-
-        .gallery h2 {
-            text-align: center;
-            font-size: 3.5rem;
-            color: var(--primary-gold);
-            margin-bottom: 3rem;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .gallery-item {
-            position: relative;
-            height: 300px;
-            border-radius: 20px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Reservation */
-        .reservation {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--dark-secondary) 100%);
-        }
-
-        .reservation h2 {
-            text-align: center;
-            font-size: 3.5rem;
-            color: var(--primary-gold);
-            margin-bottom: 3rem;
-        }
-
-        .reservation-form {
-            max-width: 600px;
-            margin: 0 auto;
-            background: var(--dark-secondary);
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--primary-gold);
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 1rem;
-            background: var(--dark-bg);
-            border: 2px solid transparent;
-            border-radius: 10px;
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-gold);
-        }
-
-        /* Contact */
-        .contact {
-            background: var(--dark-bg);
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-        }
-
-        .contact-info h3 {
-            color: var(--primary-gold);
-            margin-bottom: 2rem;
-            font-size: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            gap: 1rem;
-        }
-
-        .contact-item i {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        #map {
-            height: 400px;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark-secondary);
-            padding: 3rem 0 1rem;
-            text-align: center;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            width: 50px;
-            height: 50px;
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-            font-size: 1.2rem;
-        }
-
-        .social-links a:hover {
-            transform: translateY(-5px) scale(1.1);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
-            .nav-links {
-                position: fixed;
-                top: 100%;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: var(--dark-bg);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                padding-top: 2rem;
-                transition: left 0.3s ease;
-            }
-
-            .nav-links.active {
-                left: 0;
-            }
-
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            section {
-                padding: 60px 0;
-            }
-
-            .reservation-form {
-                padding: 2rem;
-                margin: 0 1rem;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in-up {
-            animation: fadeInUp 0.8s ease forwards;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spice Garden</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+
+<style>
+body{margin:0;font-family:Inter;background:#111;color:#fff}
+nav{position:fixed;width:100%;background:#000;padding:10px;top:0}
+.logo{color:gold;font-size:22px}
+.hero{height:100vh;display:flex;justify-content:center;align-items:center;text-align:center}
+button{padding:10px 20px;border:none;background:gold;cursor:pointer}
+
+/* MENU */
+.menu{padding:80px 20px}
+.filter-btn{margin:5px;padding:10px;border:1px solid gold;background:none;color:white;cursor:pointer}
+.menu-item{display:none;background:#222;margin:10px;padding:15px}
+.show{display:block}
+
+/* GALLERY */
+.gallery img{width:100%;max-width:300px;margin:10px;border-radius:10px}
+
+/* CONTACT */
+.contact{padding:50px}
+
+/* WhatsApp */
+.whatsapp{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#25D366;
+color:white;
+padding:15px;
+border-radius:50%;
+font-size:20px;
+text-decoration:none;
+}
+</style>
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">Spice Garden</a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#menu">Menu</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#reservation">Book Table</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Spice Garden</h1>
-            <p class="tagline">Authentic Flavors, Modern Elegance</p>
-            <a href="#reservation" class="cta-button">Book Table</a>
-        </div>
-    </section>
+<nav>
+<span class="logo">Spice Garden</span>
+</nav>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>Our Story</h2>
-                    <p>Spice Garden brings the rich heritage of Indian cuisine to Hyderabad with a modern twist. Founded by passionate chefs with decades of experience, we blend traditional recipes with contemporary presentation to create unforgettable dining experiences.</p>
-                    <p>Our ambiance combines warm lighting, elegant decor, and aromatic spices that transport you to the heart of India. Every dish tells a story of tradition, passion, and perfection.</p>
-                </div>
-                <div class="about-image">
-                    <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 400'><rect fill='%232d2d2d' width='600' height='400' rx='20'/><circle fill='%23D4AF37' opacity='0.3' cx='150' cy='100' r='60'/><rect fill='%23ff6b35' opacity='0.2' x='300' y='150' width='200' height='100' rx='10'/><path fill='%23b0b0b0' opacity='0.1' d='M50 300 Q200 250 400 320 Q500 350 550 300'/></svg>" alt="Restaurant Interior">
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<section class="hero">
+<div>
+<h1>Spice Garden</h1>
+<p>Authentic Flavors</p>
+<a href="#menu"><button>View Menu</button></a>
+</div>
+</section>
 
-    <!-- Menu Section -->
-    <section id="menu" class="menu">
-        <div class="container">
-            <h2 class="fade-in-up">Our Menu</h2>
-            <div class="menu-filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="starters">Starters</button>
-                <button class="filter-btn" data-filter="main">Main Course</button>
-                <button class="filter-btn" data-filter="desserts">Desserts</button>
-                <button class="filter-btn" data-filter="beverages">Beverages</button>
-            </div>
-            <div class="menu-grid">
-                <div class="menu-item starters" data-category="starters">
-                    <h3>Chicken 65</h3>
-                    <p class="menu-price">₹350</p>
-                    <p>Spicy fried chicken cubes with curry leaves and yogurt marinade</p>
-                </div>
-                <div class="menu-item main" data-category="main">
-                    <h3>Butter Chicken</h3>
-                    <p class="menu-price">₹450</p>
-                    <p>Tender chicken in creamy tomato butter gravy</p>
-                </div>
-                <div class="menu-item desserts" data-category="desserts">
-                    <h3>Gulab Jamun</h3>
-                    <p class="menu-price">₹150</p>
-                    <p>Soft milk dumplings in rose-flavored sugar syrup</p>
-                </div>
-                <div class="menu-item beverages" data-category
+<!-- MENU -->
+<section id="menu" class="menu">
+<h2>Menu (Starting ₹99)</h2>
+
+<button class="filter-btn" onclick="filter('all')">All</button>
+<button class="filter-btn" onclick="filter('veg')">Veg</button>
+<button class="filter-btn" onclick="filter('nonveg')">Non-Veg</button>
+
+<div class="menu-item veg show">
+<h3>Paneer Butter Masala</h3>
+<p>₹199</p>
+</div>
+
+<div class="menu-item veg show">
+<h3>Veg Biryani</h3>
+<p>₹149</p>
+</div>
+
+<div class="menu-item nonveg show">
+<h3>Chicken Biryani</h3>
+<p>₹199</p>
+</div>
+
+<div class="menu-item nonveg show">
+<h3>Chicken 65</h3>
+<p>₹149</p>
+</div>
+
+</section>
+
+<!-- GALLERY -->
+<section class="gallery">
+<h2>Gallery</h2>
+
+<img src="https://source.unsplash.com/300x200/?indian-food">
+<img src="https://source.unsplash.com/300x200/?restaurant">
+<img src="https://source.unsplash.com/300x200/?biryani">
+
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+<h2>Contact</h2>
+<p>📞 7865433887</p>
+<p>📍 Hyderabad, Road no 16</p>
+<p>📸 Instagram: spicegarden_rest</p>
+</section>
+
+<!-- WhatsApp -->
+<a href="https://wa.me/917865433887" class="whatsapp">💬</a>
+
+<script>
+function filter(type){
+let items=document.querySelectorAll('.menu-item');
+
+items.forEach(item=>{
+item.classList.remove('show');
+
+if(type==='all'){
+item.classList.add('show');
+}
+else if(item.classList.contains(type)){
+item.classList.add('show');
+}
+});
+}
+</script>
+
+</body>
+</html>
